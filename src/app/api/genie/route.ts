@@ -36,12 +36,19 @@ Sample rows: ${JSON.stringify(rows.slice(0, 40))}
 Question: ${parsed.data.question}
 Respond as JSON: {"answer": string, "insights": string[], "suggested_sql": string|null}`;
 
-  const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", temperature: 0.2 } }),
-  });
-  if (!r.ok) return NextResponse.json({ error: `AI provider error (${r.status})` }, { status: 502 });
+  // Retry transient overloads (503/429), trying a fallback model alias on later attempts.
+  const models = ["gemini-3.8-flash", "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-latest"];
+  let r: Response | null = null;
+  for (let i = 0; i < models.length; i++) {
+    r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${models[i]}:generateContent`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", temperature: 0.2 } }),
+    });
+    if (r.ok || (r.status !== 503 && r.status !== 429)) break;
+    await new Promise((res) => setTimeout(res, 1500 * (i + 1)));
+  }
+  if (!r || !r.ok) return NextResponse.json({ error: r?.status === 503 || r?.status === 429 ? "The AI service is busy right now. Please try again in a minute (no credit was used)." : `AI provider error (${r?.status})` }, { status: 502 });
   const text = (await r.json())?.candidates?.[0]?.content?.parts?.[0]?.text;
   let result;
   try { result = Answer.parse(JSON.parse(text)); } catch { return NextResponse.json({ error: "The AI returned an unreadable answer. Try rephrasing." }, { status: 502 }); }
