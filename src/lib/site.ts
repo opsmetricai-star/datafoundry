@@ -52,11 +52,6 @@ export const NAV: NavMenu[] = [
 ];
 
 /** every /p/<slug> page that the nav + footer link to */
-export const PAGE_SLUGS: Record<string, string> = Object.fromEntries(
-  NAV.flatMap((m) => m.groups.flatMap((g) => g.links))
-    .filter((l) => l.href.startsWith("/p/"))
-    .map((l) => [l.href.replace("/p/", ""), l.label]),
-);
 
 export const PLANS = [
   { id: "starter", name: "Starter", price: 47, blurb: "For individuals and small teams exploring governed data and AI.", url: process.env.NEXT_PUBLIC_PAY_47 || "https://selar.com/47plan?currency=USD", credits: 100, features: ["100 AI credits / month", "3 workspaces", "SQL editor + dashboards", "Community support"] },
