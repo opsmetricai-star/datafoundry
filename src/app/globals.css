@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --red: #ff3621;
+  --red-dark: #e02e1a;
+  --navy: #0b2026;
+  --navy-2: #1b3139;
+  --cream: #eeede9;
+  --bg-soft: #f9f7f4;
+  --ink: #0b2026;
+  --muted: #5a6f77;
+  --line: #e4e2dd;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-red: var(--red);
+  --color-navy: var(--navy);
+  --color-cream: var(--cream);
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
+body { background: #fff; color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.h-xl { font-size: clamp(40px, 6vw, 72px); line-height: 1.08; font-weight: 500; letter-spacing: -.02em; }
+.h-lg { font-size: clamp(30px, 4vw, 48px); line-height: 1.12; font-weight: 500; letter-spacing: -.015em; }
+.btn { display: inline-block; padding: 14px 24px; font-size: 15px; font-weight: 500; border-radius: 2px; transition: background .15s, color .15s, border-color .15s; }
+.btn-red { background: var(--red); color: #fff; }
+.btn-red:hover { background: var(--red-dark); }
+.btn-dark { background: var(--navy-2); color: #fff; }
+.btn-dark:hover { background: var(--navy); }
+.btn-line { border: 1px solid currentColor; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 8px; transition: box-shadow .2s, transform .2s; }
+.card:hover { box-shadow: 0 8px 28px rgba(11, 32, 38, .1); transform: translateY(-2px); }
+.dots { background-image: radial-gradient(#c9ced0 1.5px, transparent 1.5px); background-size: 18px 18px; }
+.input { width: 100%; border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; font-size: 15px; background: #fff; }
+.input:focus { outline: 2px solid var(--red); outline-offset: -1px; }
