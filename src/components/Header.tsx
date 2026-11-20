@@ -5,11 +5,11 @@ import { NAV } from "@/lib/site";
 
 export function Logo({ light = false }: { light?: boolean }) {
   return (
-    <Link href="/" className="flex items-center gap-2">
-      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden>
-        <path d="M16 3 3 10l13 7 13-7-13-7Z" fill="#ff3621" />
-        <path d="m3 15 13 7 13-7M3 21l13 7 13-7" stroke="#ff3621" strokeWidth="3" fill="none" />
-      </svg>
+    <Link href="/" className="flex items-center gap-3" aria-label="DataFoundry home">
+      <span className={light ? "flex rounded-md bg-white px-2 py-1.5" : "flex"}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo.png" alt="DataFoundry logo" width={33} height={36} className="h-9 w-auto" />
+      </span>
       <span className={`text-[26px] font-semibold tracking-tight ${light ? "text-white" : "text-[#0b2026]"}`}>datafoundry</span>
     </Link>
   );
