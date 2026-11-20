@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { Logo } from "@/components/Header";
 
 const ITEMS = [["Overview", "/app"], ["Datasets", "/app/datasets"], ["Genie", "/app/genie"], ["Billing", "/app/billing"], ["Settings", "/app/settings"]];
 
+export const instant = false;
+
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  await connection();
   const sb = await createClient();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) redirect("/login");

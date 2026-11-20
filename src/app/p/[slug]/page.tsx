@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ALL_PAGES, type Kind } from "@/lib/pages";
 
+export const instant = false;
+
 export function generateStaticParams() {
   return Object.keys(ALL_PAGES).map((slug) => ({ slug }));
 }
