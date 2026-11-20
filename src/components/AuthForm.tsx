@@ -15,37 +15,44 @@ export default function AuthForm({ mode }: { mode: Mode }) {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setMsg(null);
+    try {
     const sb = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
-    const origin = window.location.origin;
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    const plan = new URLSearchParams(window.location.search).get("plan");
+    const dest = plan ? "/app/billing" : "/app";
     if (mode === "login") {
       const { error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) setMsg({ ok: false, text: error.message }); else window.location.href = "/app";
+      if (error) setMsg({ ok: false, text: error.message }); else window.location.href = dest;
     } else if (mode === "signup") {
-      const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo: `${origin}/app` } });
+      const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo: `${origin}${dest}` } });
       if (error) setMsg({ ok: false, text: error.message });
-      else if (data.session) window.location.href = "/app";
+      else if (data.session) window.location.href = dest;
       else setMsg({ ok: true, text: "Check your email to confirm your account, then log in." });
     } else {
       const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: `${origin}/app/settings` });
       setMsg(error ? { ok: false, text: error.message } : { ok: true, text: "If that account exists, a reset link is on its way." });
     }
-    setBusy(false);
+    } catch {
+      setMsg({ ok: false, text: "Connection problem. Please try again." });
+    } finally {
+      setBusy(false);
+    }
   }
 
-  const title = { login: "Log in", signup: "Create your account", forgot: "Reset your password" }[mode];
+  const title = { login: "Log in", signup: "Create account", forgot: "Reset password" }[mode];
   return (
     <main className="grid min-h-screen place-items-center bg-[var(--cream)] px-4">
       <div className="w-full max-w-md rounded-lg bg-white p-9 shadow-xl">
         <Logo />
         <h1 className="mt-8 text-[28px] font-medium">{title}</h1>
         <form onSubmit={submit} className="mt-6 space-y-4">
-          <input className="input" type="email" required placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input className="input" type="email" required placeholder="Work email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           {mode !== "forgot" && <input className="input" type="password" required minLength={8} placeholder="Password (8+ characters)" value={password} onChange={(e) => setPassword(e.target.value)} />}
           {msg && <p role="alert" className={`text-[14px] ${msg.ok ? "text-green-700" : "text-red-600"}`}>{msg.text}</p>}
-          <button disabled={busy} className="btn btn-red w-full disabled:opacity-60">{busy ? "Please wait…" : title}</button>
+          <button disabled={busy} className="btn btn-red w-full disabled:opacity-60">{busy ? "Please wait" : title}</button>
         </form>
         <div className="mt-5 flex justify-between text-[14px] text-[var(--muted)]">
-          {mode === "login" ? <><Link href="/signup">Create account</Link><Link href="/forgot">Forgot password?</Link></> : <Link href="/login">Back to log in</Link>}
+          {mode === "login" ? <><Link href="/signup">Create account</Link><Link href="/forgot">Reset password</Link></> : <Link href="/login">Log in</Link>}
         </div>
       </div>
     </main>

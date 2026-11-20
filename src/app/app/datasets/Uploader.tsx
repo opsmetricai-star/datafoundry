@@ -28,7 +28,7 @@ export default function Uploader() {
     <div className="mt-6 rounded-lg border-2 border-dashed border-[var(--line)] bg-white p-8 text-center">
       <p className="mb-3 text-[var(--muted)]">Upload a CSV file (up to 5,000 rows)</p>
       <input type="file" accept=".csv,text/csv" onChange={onFile} disabled={busy} />
-      {busy && <p className="mt-3">Uploading…</p>}
+      {busy && <p className="mt-3">Uploading</p>}
       {msg && <p role="alert" className="mt-3 text-red-600">{msg}</p>}
     </div>
   );

@@ -18,10 +18,10 @@ export default async function Overview() {
           <div className="mt-3 h-2 rounded bg-[var(--cream)]"><div className="h-2 rounded bg-[var(--red)]" style={{ width: `${limit ? Math.min(100, (used / limit) * 100) : 0}%` }} /></div></div>
         <div className="card p-6"><div className="eyebrow text-[var(--muted)]">Datasets</div><div className="mt-2 text-[32px]">{ds ?? 0}</div></div>
       </div>
-      <h2 className="mt-10 text-[22px] font-medium">Recent questions</h2>
+      <h2 className="mt-10 text-[22px] font-medium">Recent analyses</h2>
       <ul className="mt-4 divide-y divide-[var(--line)] rounded-lg border border-[var(--line)] bg-white">
         {(recent ?? []).map((q) => <li key={q.id} className="p-4">{q.question}</li>)}
-        {!recent?.length && <li className="p-4 text-[var(--muted)]">Nothing yet. <Link className="text-[var(--red)] underline" href="/app/datasets">Upload a dataset</Link> and ask Genie.</li>}
+        {!recent?.length && <li className="p-4 text-[var(--muted)]">No analyses yet. <Link className="text-[var(--red)] underline" href="/app/datasets">Upload a dataset</Link> to run your first analysis.</li>}
       </ul>
     </div>
   );

@@ -10,23 +10,28 @@ export default function GenieChat({ datasets, initial }: { datasets: { id: strin
   const [err, setErr] = useState<string | null>(null);
   const [res, setRes] = useState<Ans | null>(null);
 
-  if (!datasets.length) return <p className="mt-8">Upload a dataset first on the Datasets page.</p>;
+  if (!datasets.length) return <p className="mt-8">Upload a dataset on the Datasets page to start analysis.</p>;
 
   async function ask(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setErr(null); setRes(null);
-    const r = await fetch("/api/genie", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ datasetId: id, question: q }) });
-    const j = await r.json().catch(() => ({}));
-    setBusy(false);
-    if (!r.ok) setErr(j.error ?? "Something went wrong"); else setRes(j);
+    try {
+      const r = await fetch("/api/genie", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ datasetId: id, question: q }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) setErr(j.error ?? "The analysis could not be completed. Please try again."); else setRes(j);
+    } catch {
+      setErr("Connection problem. Please check your network and try again.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
     <div className="mt-8">
       <form onSubmit={ask} className="space-y-3">
         <select className="input" value={id} onChange={(e) => setId(e.target.value)}>{datasets.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select>
-        <textarea className="input" rows={3} required minLength={3} maxLength={500} placeholder="e.g. Which region has the highest total revenue?" value={q} onChange={(e) => setQ(e.target.value)} />
-        <button disabled={busy} className="btn btn-red disabled:opacity-60">{busy ? "Thinking…" : "Ask Genie"}</button>
+        <textarea className="input" rows={3} required minLength={3} maxLength={500} placeholder="e.g. Which region generates the highest total revenue?" value={q} onChange={(e) => setQ(e.target.value)} />
+        <button disabled={busy} className="btn btn-red disabled:opacity-60">{busy ? "Analyzing" : "Analyze"}</button>
       </form>
       {err && <p role="alert" className="mt-4 text-red-600">{err}</p>}
       {res && (

@@ -3,13 +3,13 @@ import Link from "next/link";
 import { useState } from "react";
 
 const TABS = [
-  { t: "Platform", h: "The DataFoundry Data + AI Platform", b: "Unify your data, analytics and AI in one governed workspace. Power agents, apps and natural-language insights from the same foundation.", c: "Explore the platform", l: "/p/platform" },
-  { t: "Database", h: "Modern applications need a foundrybase", b: "A serverless Postgres layer that shares storage with your analytics, so operational and analytical workloads stop living in separate worlds.", c: "Explore FoundryBase", l: "/p/foundrybase" },
-  { t: "AI", h: "Build AI agents that work in the real world", b: "Ship production-grade agents that are grounded in your governed data, evaluated continuously and observable from day one.", c: "Explore Agent Studio", l: "/p/ai" },
-  { t: "Business intelligence", h: "Intelligent analytics for all", b: "Natural-language dashboards and a data-aware assistant let every team ask questions and trust the answers.", c: "Explore AI/BI", l: "/p/bi" },
-  { t: "Governance", h: "Govern data and AI on one platform", b: "One catalog for tables, models, dashboards and agents, with lineage, access policy and audit built in.", c: "Explore Governance", l: "/p/governance" },
-  { t: "Data warehousing", h: "The best warehouse is still a lakehouse", b: "Serverless SQL on open data formats lowers cost of ownership without giving up speed or concurrency.", c: "Explore Lakehouse", l: "/p/warehousing" },
-  { t: "Data engineering", h: "Build better data pipelines faster", b: "Declarative pipelines, scheduling and quality checks that turn raw sources into reliable tables.", c: "Explore Pipelines", l: "/p/data-engineering" },
+  { t: "Platform", h: "The AI-native data platform", b: "One governed foundation where AI analyzes your data, predicts outcomes, decides next actions and automates the work, cutting reporting cycles and duplicate tooling cost.", c: "Create account", l: "/signup" },
+  { t: "Database", h: "Modern applications need a foundrybase", b: "Serverless Postgres that shares storage with the AI engine, so operational data is analysis-ready the moment it is written and reporting lag disappears.", c: "Create account", l: "/signup" },
+  { t: "AI", h: "Build AI agents that work in the real world", b: "Deploy agents that analyze, decide and act on governed data. Every agent is evaluated before release and monitored for cost, latency and accuracy.", c: "Create account", l: "/signup" },
+  { t: "Business intelligence", h: "Intelligent analytics for all", b: "AI explains every movement in the numbers and answers executive questions on one governed set of metrics, so leadership stops waiting on analyst queues.", c: "Create account", l: "/signup" },
+  { t: "Governance", h: "Govern data and AI on one platform", b: "One control plane for tables, models and agents, with lineage, access policy and audit trails that make every AI decision defensible.", c: "Create account", l: "/signup" },
+  { t: "Data warehousing", h: "The best warehouse is still a lakehouse", b: "Serverless SQL on open formats lowers cost per query and removes cluster management while sustaining high concurrency.", c: "Create account", l: "/signup" },
+  { t: "Data engineering", h: "Build better data pipelines faster", b: "Declarative pipelines with automated quality enforcement turn raw sources into trusted tables and cut engineering hours per data product.", c: "Create account", l: "/signup" },
 ];
 
 export function PlatformTabs() {
@@ -40,12 +40,12 @@ export function PlatformTabs() {
 }
 
 const FAQ = [
-  ["What is DataFoundry?", "DataFoundry is a unified data and AI platform that runs analytical and operational workloads on one open, governed foundation."],
-  ["How do I try DataFoundry?", "Create a free account, connect a data source or upload a file, and start querying. No credit card is required to begin."],
+  ["What is DataFoundry?", "DataFoundry is an AI-native data platform for businesses. Its engine analyzes governed data, predicts outcomes, recommends decisions and automates workflows on one open foundation."],
+  ["How does an organization get started?", "Create an account, upload a dataset and put a business question to Genie. Plans include monthly AI credits and scale with usage."],
   ["What is a foundrybase?", "A foundrybase combines serverless Postgres with lakehouse storage, so application data and analytics share one governed copy."],
-  ["What is a data warehouse?", "A system optimised for fast SQL analytics over structured data. DataFoundry delivers this on open lake formats."],
-  ["What is DataFoundry Genie?", "A data-aware assistant that answers questions in plain English and generates SQL against your governed tables."],
-  ["What is the AI Gateway?", "A control point for model access, cost limits, observability and guardrails across every AI provider you use."],
+  ["How does DataFoundry reduce cost?", "One platform replaces separate warehouse, database and ML tooling, which removes duplicate storage, integration work and idle compute."],
+  ["What is Genie?", "Genie is the AI analyst in DataFoundry. It answers business questions from governed tables, computes exact figures deterministically and shows the SQL behind every answer."],
+  ["How is AI usage controlled?", "Credits, rate limits and guardrails apply per team. Outputs are validated against a schema before they reach a user or a workflow."],
   ["What is a data lakehouse?", "An architecture that pairs the low-cost storage of a data lake with the reliability and performance of a warehouse."],
 ];
 
@@ -64,7 +64,7 @@ export function Faq() {
         {FAQ.map(([q, a], i) => (
           <div key={q} className="py-5">
             <button className="flex w-full items-center justify-between text-left text-[20px]" onClick={() => toggle(i)} aria-expanded={open.has(i)}>
-              {q}<span className="text-2xl text-[var(--red)]">{open.has(i) ? "−" : "+"}</span>
+              {q}<span className="text-2xl text-[var(--red)]">{open.has(i) ? "-" : "+"}</span>
             </button>
             {open.has(i) && <p className="mt-3 max-w-3xl text-[var(--muted)]">{a}</p>}
           </div>

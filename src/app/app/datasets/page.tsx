@@ -11,11 +11,11 @@ export default async function Datasets() {
       <div className="mt-8 grid gap-3">
         {(data ?? []).map((d) => (
           <div key={d.id} className="card flex flex-wrap items-center justify-between gap-2 p-5">
-            <div><div className="text-[18px] font-medium">{d.name}</div><div className="text-[14px] text-[var(--muted)]">{d.row_count} rows · {(d.columns as string[]).length} columns · {(d.columns as string[]).slice(0, 5).join(", ")}</div></div>
-            <a className="text-[var(--red)]" href={`/app/genie?dataset=${d.id}`}>Ask Genie →</a>
+            <div><div className="text-[18px] font-medium">{d.name}</div><div className="text-[14px] text-[var(--muted)]">{d.row_count} rows | {(d.columns as string[]).length} columns | {(d.columns as string[]).slice(0, 5).join(", ")}</div></div>
+            <a className="text-[var(--red)]" href={`/app/genie?dataset=${d.id}`}>Analyze</a>
           </div>
         ))}
-        {!data?.length && <p className="text-[var(--muted)]">No datasets yet.</p>}
+        {!data?.length && <p className="text-[var(--muted)]">No datasets yet. Upload a CSV above to begin.</p>}
       </div>
     </div>
   );

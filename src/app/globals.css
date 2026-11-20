@@ -27,7 +27,7 @@ body { background: #fff; color: var(--ink); font-family: var(--font-sans); -webk
 .eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
 .h-xl { font-size: clamp(40px, 6vw, 72px); line-height: 1.08; font-weight: 500; letter-spacing: -.02em; }
 .h-lg { font-size: clamp(30px, 4vw, 48px); line-height: 1.12; font-weight: 500; letter-spacing: -.015em; }
-.btn { display: inline-block; padding: 14px 24px; font-size: 15px; font-weight: 500; border-radius: 2px; transition: background .15s, color .15s, border-color .15s; }
+.btn { display: inline-block; white-space: nowrap; padding: 14px 24px; font-size: 15px; font-weight: 500; border-radius: 2px; transition: background .15s, color .15s, border-color .15s; }
 .btn-red { background: var(--red); color: #fff; }
 .btn-red:hover { background: var(--red-dark); }
 .btn-dark { background: var(--navy-2); color: #fff; }

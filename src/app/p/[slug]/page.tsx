@@ -17,7 +17,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (!page) notFound();
   const cards = page.points.slice(0, 4);
   const steps = page.points.slice(4);
-  const cta = page.cta ?? ["Try DataFoundry", "/signup"];
 
   return (
     <>
@@ -30,8 +29,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             <p className="mt-6 max-w-2xl text-[22px] leading-snug text-[#1b3139]">{page.lede}</p>
             {page.kind !== "legal" && (
               <div className="mt-9 flex flex-wrap gap-4">
-                <Link href={cta[1]} className="btn btn-red">{cta[0]}</Link>
-                <Link href="/pricing" className="btn btn-dark">See pricing</Link>
+                <Link href="/signup" className="btn btn-red">Create account</Link>
+                <Link href="/login" className="btn btn-dark">Log in</Link>
               </div>
             )}
           </div>
@@ -53,7 +52,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         {cards.length > 0 && (
           <section className="bg-[var(--cream)] py-20">
             <div className="wrap">
-              <h2 className="h-lg max-w-2xl">{page.kind === "product" ? "What you get" : "Highlights"}</h2>
+              <h2 className="h-lg max-w-2xl">{page.kind === "product" ? "What the platform delivers" : "Highlights"}</h2>
               <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {cards.map(([t, b]) => (
                   <div key={t} className="card p-7"><div className="text-[20px] font-medium">{t}</div><p className="mt-3 text-[var(--muted)]">{b}</p></div>
@@ -76,8 +75,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
         {page.kind !== "legal" && (
           <section className="bg-[var(--navy)] py-20 text-center text-white">
-            <h2 className="h-lg">Start your data + AI journey</h2>
-            <div className="mt-8 flex justify-center gap-4"><Link href="/p/demos" className="btn btn-line">Browse demos</Link><Link href="/signup" className="btn btn-red">Try it free</Link></div>
+            <h2 className="h-lg mx-auto max-w-3xl px-6">Put AI to work on your company data</h2>
+            <div className="mt-8 flex justify-center gap-4"><Link href="/login" className="btn btn-line">Log in</Link><Link href="/signup" className="btn btn-red">Create account</Link></div>
           </section>
         )}
       </main>

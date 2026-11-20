@@ -41,16 +41,21 @@ function HeroMock() {
 }
 
 const PRODUCTS = [
-  ["FoundryBase", "The first serverless Postgres database unified with the lakehouse, built for the AI era.", "/p/foundrybase"],
-  ["Genie", "Your data-aware AI partner for faster work and deeper insights.", "/p/genie"],
-  ["AI Gateway", "Govern enterprise AI with unified access, cost control, observability and guardrails.", "/p/ai"],
-  ["Lakehouse", "Serverless data warehousing on open lake data, with governance and AI built in.", "/p/warehousing"],
+  ["FoundryBase", "Serverless Postgres unified with the AI engine. Production data is analysis-ready the moment it is written.", "/p/foundrybase"],
+  ["Genie", "The AI analyst that answers business questions from governed tables and shows the SQL behind each answer.", "/p/genie"],
+  ["AI agents", "Agents that analyze, decide and act on company data, with evaluation, guardrails and cost limits per team.", "/p/ai-agents"],
+  ["Lakehouse", "Serverless warehousing on open data. Lower cost per query and no clusters to manage.", "/p/warehousing"],
 ];
 const SPOT = [
-  ["EBOOK", "How to govern AI cost-effectively and securely at scale", "Read now", "/p/resources"],
-  ["EXEC PANEL", "How security leaders are rethinking SecOps", "Watch now", "/p/events"],
-  ["IN-PERSON + VIRTUAL", "The must-attend event for data and AI professionals", "Register now", "/p/summit"],
-  ["VIRTUAL EVENT", "Get the emerging blueprint for agentic apps", "Register now", "/p/events"],
+  ["ARCHITECTURE", "Reference architectures for the AI-native lakehouse", "/p/architectures"],
+  ["GOVERNANCE", "Make every AI decision traceable and auditable", "/p/ai-governance"],
+  ["MIGRATION", "Retire legacy warehouse cost with automated conversion", "/p/migration"],
+  ["SECURITY", "Row-level isolation, managed authentication and server-side secrets", "/p/trust"],
+];
+const OUTCOMES = [
+  ["Revenue", "Forecast demand, price and churn on one governed dataset so commercial teams act before the quarter closes."],
+  ["Cost", "Replace separate warehouse, database and ML tools. Serverless compute scales to zero when idle."],
+  ["Risk", "Row-level isolation, lineage and audit trails make every figure and every AI decision defensible."],
 ];
 
 export default function Home() {
@@ -60,26 +65,26 @@ export default function Home() {
       <main>
         <section className="wrap grid items-center gap-8 py-16 lg:grid-cols-[1fr_1.15fr] lg:py-24">
           <div>
-            <h1 className="h-xl"><span className="text-[var(--red)]">One database</span> for AI, apps and agents</h1>
-            <p className="mt-6 max-w-xl text-[22px] leading-snug text-[#1b3139]">FoundryBase is serverless Postgres for applications that scale</p>
-            <div className="mt-9 flex flex-wrap gap-5"><Link href="/p/foundrybase" className="btn btn-red">Explore the product</Link><Link href="/p/demos" className="btn btn-dark">See demo</Link></div>
+            <h1 className="h-xl"><span className="text-[var(--red)]">AI that decides</span> on your company data</h1>
+            <p className="mt-6 max-w-xl text-[21px] leading-snug text-[#1b3139]">DataFoundry is the AI-native data platform for operators and decision-makers. It analyzes every dataset, predicts outcomes and automates the work behind revenue, cost and risk.</p>
+            <div className="mt-9 flex flex-wrap gap-5"><Link href="/signup" className="btn btn-red">Create account</Link><Link href="/login" className="btn btn-dark">Log in</Link></div>
           </div>
           <HeroMock />
         </section>
 
         <section className="bg-[var(--navy)] py-9 text-white">
           <div className="wrap flex flex-col items-center gap-8 md:flex-row">
-            <div className="eyebrow max-w-[150px] leading-5">Trusted by data + AI teams</div>
-            <div className="flex flex-1 flex-wrap items-center justify-between gap-6 border-white/20 text-[24px] font-semibold opacity-90 md:border-l md:pl-10">
-              {["Northwind", "Heliotrope", "Meridian", "Orbitex", "Kestrel", "Brightloop"].map((n) => <span key={n} className="tracking-tight">{n}</span>)}
+            <div className="eyebrow max-w-[170px] leading-5">Built for regulated, data-heavy industries</div>
+            <div className="flex flex-1 flex-wrap items-center justify-between gap-6 text-[22px] font-semibold opacity-90 md:border-l md:border-white/20 md:pl-10">
+              {["Financial services", "Healthcare", "Retail", "Manufacturing", "Telecom", "Public sector"].map((n) => <span key={n} className="tracking-tight">{n}</span>)}
             </div>
           </div>
         </section>
 
         <section className="bg-[var(--navy)] pb-24 pt-16 text-center text-white">
           <div className="wrap">
-            <div className="eyebrow text-[var(--red)]">The DataFoundry Data + AI Platform</div>
-            <h2 className="h-lg mx-auto mt-5 max-w-3xl">Build and run apps, agents and AI on your data</h2>
+            <div className="eyebrow text-[var(--red)]">The AI-native data platform</div>
+            <h2 className="h-lg mx-auto mt-5 max-w-3xl">One engine that analyzes, predicts, decides and automates</h2>
             <PlatformTabs />
           </div>
         </section>
@@ -89,9 +94,8 @@ export default function Home() {
             <div className="eyebrow text-[var(--red)]">Featured products</div>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {PRODUCTS.map(([t, b, l]) => (
-                <Link key={t} href={l} className="card flex min-h-[260px] flex-col p-7">
-                  <div className="text-[26px] font-medium">{t}</div><p className="mt-3 flex-1 text-[var(--muted)]">{b}</p>
-                  <span className="mt-6 text-[var(--red)]">Learn more →</span>
+                <Link key={t} href={l} className="card flex min-h-[240px] flex-col p-7">
+                  <div className="text-[26px] font-medium">{t}</div><p className="mt-3 text-[var(--muted)]">{b}</p>
                 </Link>
               ))}
             </div>
@@ -99,43 +103,48 @@ export default function Home() {
         </section>
 
         <section className="wrap py-24">
-          <div className="eyebrow text-[var(--red)]">Proven impact</div>
-          <h2 className="h-lg mt-4 max-w-2xl">How innovators win with data and AI</h2>
-          <div className="mt-8 flex gap-5"><Link href="/p/customers" className="btn btn-red">See more customer stories</Link><Link href="/p/awards" className="btn btn-line">See more awards</Link></div>
+          <div className="eyebrow text-[var(--red)]">Outcomes</div>
+          <h2 className="h-lg mt-4 max-w-3xl">Faster decisions, lower cost, controlled risk</h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {OUTCOMES.map(([t, b]) => (
+              <div key={t} className="border-t-2 border-[var(--red)] pt-5"><div className="text-[24px] font-medium">{t}</div><p className="mt-2 text-[var(--muted)]">{b}</p></div>
+            ))}
+          </div>
+          <div className="mt-10 flex gap-5"><Link href="/signup" className="btn btn-red">Create account</Link><Link href="/login" className="btn btn-line">Log in</Link></div>
         </section>
 
         <section className="bg-[var(--bg-soft)] py-24">
           <div className="wrap">
-            <div className="eyebrow text-[var(--red)]">Awards and recognition</div>
-            <h2 className="h-lg mt-4 max-w-2xl">Recognized for innovation in data and AI</h2>
+            <div className="eyebrow text-[var(--red)]">Built for accountability</div>
+            <h2 className="h-lg mt-4 max-w-3xl">Numbers a board can rely on</h2>
             <div className="mt-12 grid gap-10 md:grid-cols-3">
-              <Stat to={70} suffix="%" label="Over 70% of the Fortune 500 runs on platforms like ours" />
-              <Stat to={20} suffix="K+" label="Over 20,000 customers across the globe" />
-              <Stat to={5} suffix="x" label="5x leader in analyst evaluations" />
+              <Stat to={1} suffix="" label="Governed copy of every dataset, shared by analytics, applications and agents" />
+              <Stat to={0} suffix="" label="Clusters to size, patch or pay for while idle" />
+              <Stat to={100} suffix="%" label="Of reported figures computed deterministically, never generated by a model" />
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-2">
-              {["2026 AI Platforms for Data Science and ML — leader placement", "Top 50 best software companies across key review categories in 2026"].map((t) => (
-                <div key={t} className="card p-7"><div className="mb-10 h-28 rounded bg-[var(--cream)]" /><p className="text-[20px]">{t}</p><Link href="/p/awards" className="mt-4 inline-block text-[var(--red)]">Read more →</Link></div>
+              {[["Deterministic by design", "Totals, averages and counts are calculated by the platform. The model explains and recommends; it never invents a number."], ["Governed by default", "Access policy is enforced in the database itself, so a misconfigured application cannot expose another team's data."]].map(([t, b]) => (
+                <div key={t} className="card p-7"><p className="text-[22px] font-medium">{t}</p><p className="mt-3 text-[var(--muted)]">{b}</p></div>
               ))}
             </div>
           </div>
         </section>
 
         <section className="wrap py-24">
-          <h2 className="h-lg">In the spotlight</h2>
+          <h2 className="h-lg">Go deeper</h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {SPOT.map(([e, t, c, l]) => (
+            {SPOT.map(([e, t, l]) => (
               <Link key={t} href={l} className="card flex flex-col p-6">
                 <div className="mb-6 h-32 rounded bg-[var(--navy)]" /><div className="eyebrow text-[11px] text-[var(--red)]">{e}</div>
-                <p className="mt-2 flex-1 text-[18px] leading-snug">{t}</p><span className="mt-4 text-[var(--red)]">{c} →</span>
+                <p className="mt-2 flex-1 text-[18px] leading-snug">{t}</p>
               </Link>
             ))}
           </div>
         </section>
 
         <section className="bg-[var(--navy)] py-24 text-center text-white">
-          <h2 className="h-lg">Start your data + AI journey</h2>
-          <div className="mt-9 flex justify-center gap-5"><Link href="/p/demos" className="btn btn-line">Browse demos</Link><Link href="/signup" className="btn btn-red">Try it free</Link></div>
+          <h2 className="h-lg mx-auto max-w-3xl px-6">Put AI to work on your company data</h2>
+          <div className="mt-9 flex justify-center gap-5"><Link href="/login" className="btn btn-line">Log in</Link><Link href="/signup" className="btn btn-red">Create account</Link></div>
         </section>
 
         <Faq />

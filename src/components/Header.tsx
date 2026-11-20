@@ -21,19 +21,18 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-white" onMouseLeave={() => setOpen(null)}>
       <div className="wrap flex h-[68px] items-center justify-between">
-        <div className="flex items-center gap-12">
+        <div className="flex items-center gap-6 xl:gap-12">
           <Logo />
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-6 xl:gap-8 lg:flex">
             {NAV.map((m, i) => (
               <button key={m.label} onMouseEnter={() => setOpen(i)} onFocus={() => setOpen(i)}
-                className={`text-[16px] ${open === i ? "text-[var(--red)]" : "text-[#1b3139]"}`}>{m.label}</button>
+                className={`whitespace-nowrap text-[16px] ${open === i ? "text-[var(--red)]" : "text-[#1b3139]"}`}>{m.label}</button>
             ))}
           </nav>
         </div>
         <div className="hidden items-center gap-6 text-[15px] lg:flex">
-          <Link href="/login">Login</Link>
-          <Link href="/p/contact">Contact Us</Link>
-          <Link href="/signup" className="btn btn-red">Try DataFoundry</Link>
+          <Link href="/login">Log in</Link>
+          <Link href="/signup" className="btn btn-red">Create account</Link>
         </div>
         <button className="lg:hidden" aria-label="Menu" onClick={() => setMobile(!mobile)}>
           <svg width="26" height="26" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
@@ -73,8 +72,8 @@ export default function Header() {
             </details>
           ))}
           <div className="mt-5 flex gap-3">
-            <Link href="/login" className="btn btn-line">Login</Link>
-            <Link href="/signup" className="btn btn-red">Try DataFoundry</Link>
+            <Link href="/login" className="btn btn-line">Log in</Link>
+            <Link href="/signup" className="btn btn-red">Create account</Link>
           </div>
         </div>
       )}

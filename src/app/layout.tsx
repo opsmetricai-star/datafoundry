@@ -7,8 +7,8 @@ const sans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
 const mono = DM_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-dm-mono" });
 
 export const metadata: Metadata = {
-  title: "DataFoundry — One database for AI, apps and agents",
-  description: "DataFoundry is a unified data and AI platform with serverless Postgres, governed analytics and production agents.",
+  title: "DataFoundry: the AI-native data platform for enterprise decisions",
+  description: "DataFoundry is the AI-native data platform that analyzes, predicts, decides and automates across the business.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

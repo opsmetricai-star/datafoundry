@@ -14,7 +14,7 @@ export async function createClient() {
   });
 }
 
-/** Server-only. Bypasses RLS — never import from client code. */
+/** Server-only. Bypasses RLS. Never import from client code. */
 export function adminClient() {
   return createAdmin(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
 }

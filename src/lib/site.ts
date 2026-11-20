@@ -54,6 +54,6 @@ export const NAV: NavMenu[] = [
 /** every /p/<slug> page that the nav + footer link to */
 
 export const PLANS = [
-  { id: "starter", name: "Starter", price: 47, blurb: "For individuals and small teams exploring governed data and AI.", url: process.env.NEXT_PUBLIC_PAY_47 || "https://selar.com/47plan?currency=USD", credits: 100, features: ["100 AI credits / month", "3 workspaces", "SQL editor + dashboards", "Community support"] },
-  { id: "pro", name: "Pro", price: 97, blurb: "For growing data teams that need pipelines, agents and governance.", url: process.env.NEXT_PUBLIC_PAY_97 || "https://selar.com/97plan?currency=USD", credits: 500, features: ["500 AI credits / month", "Unlimited workspaces", "Pipelines + scheduled jobs", "Priority support"], featured: true },
+  { id: "starter", name: "Starter", price: 47, blurb: "For teams putting AI-driven analysis on governed company data.", url: process.env.NEXT_PUBLIC_PAY_47 || "https://selar.com/47plan?currency=USD", credits: 100, features: ["100 AI credits / month", "3 workspaces", "Dataset analysis and dashboards", "Community support"] },
+  { id: "pro", name: "Pro", price: 97, blurb: "For organizations running AI analysis, pipelines and governance in production.", url: process.env.NEXT_PUBLIC_PAY_97 || "https://selar.com/97plan?currency=USD", credits: 500, features: ["500 AI credits / month", "Unlimited workspaces", "Pipelines and scheduled jobs", "Priority support"], featured: true },
 ];

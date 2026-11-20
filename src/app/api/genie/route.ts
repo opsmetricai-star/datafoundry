@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   const parsed = Body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   const key = process.env.GEMINI_API_KEY;
-  if (!key) return NextResponse.json({ error: "AI is not configured on this server (GEMINI_API_KEY missing)." }, { status: 503 });
+  if (!key) return NextResponse.json({ error: "Genie is temporarily unavailable. Please try again shortly." }, { status: 503 });
 
   const admin = adminClient();
   const { data: profile } = await admin.from("profiles").select("credits_used,credits_limit").eq("id", user.id).single();
